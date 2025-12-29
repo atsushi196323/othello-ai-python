@@ -1,0 +1,37 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: コードのチェックアウト
+      uses: actions/checkout@v4
+
+    - name: Pythonのセットアップ
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        architecture: 'x64'
+
+    - name: ライブラリのインストール
+      run: |
+        pip install pygame
+        pip install pyinstaller
+        # もし requirements.txt があるなら以下も有効にしてください
+        # pip install -r requirements.txt
+
+    - name: EXEの作成
+      run: |
+        pyinstaller main.py --onefile --noconsole --name "OthelloGame"
+
+    - name: 生成されたEXEをアップロード
+      uses: actions/upload-artifact@v4
+      with:
+        name: OthelloGame-Windows
+        path: dist/OthelloGame.exe
