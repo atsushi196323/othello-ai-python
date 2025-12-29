@@ -21,14 +21,12 @@ jobs:
 
     - name: ライブラリのインストール
       run: |
-        pip install pygame
+        pip install -r requirements-windows.txt
         pip install pyinstaller
-        # もし requirements.txt があるなら以下も有効にしてください
-        # pip install -r requirements.txt
 
     - name: EXEの作成
       run: |
-        pyinstaller main.py --onefile --noconsole --name "OthelloGame"
+        pyinstaller OthelloGame.spec
 
     - name: 生成されたEXEをアップロード
       uses: actions/upload-artifact@v4

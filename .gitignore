@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+*$py.class
+othello_env/
+env/
+.env
+venv/
+.vscode/
+*.pyc
+
+# Build artifacts
+build/
+dist/
+
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
